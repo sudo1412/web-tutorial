@@ -48,8 +48,7 @@
 <script>
 	function namAm() {
 			//lấy giá trị từ document
-			let namduong = document.getElementById('userInput').value;
-			let namam = document.getElementById('userOutput');
+			let namduong = parseInt(document.getElementById('userInput').value);
 
 			//khởi tạo các biến 'can' và 'chi'
 			let can = '';
@@ -128,7 +127,7 @@
 						chi = 'Mùi';
 						break;
 					}
-					namam.value = can + ' ' + chi;
+					document.getElementById('userOutput').innerHTML = `${can} ${chi}`;
 				}
 			</script>
 			<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
