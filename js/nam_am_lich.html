@@ -40,7 +40,7 @@
 			<button type="button" onclick="namAm()" style="padding: 1px 6px;">Convert</button>
 		</div>
 		<div id='lunar'>Năm âm lịch<br>
-			<input type="text" name="namam" id="userOutput" size="10" disable>
+			<input type="text" name="namam" id="userOutput" size="10" disabled>
 		</div>
 	</div>
 </form>
@@ -48,8 +48,8 @@
 <script>
 	function namAm() {
 			//lấy giá trị từ document
-			let namduong = document.getElementById('userInput').value;
-
+			let namduong = parseInt(document.getElementById('userInput').value);
+			let namam = document.getElementById('userOutput');
 			//khởi tạo các biến 'can' và 'chi'
 			let can = '';
 			let chi = '';
@@ -127,7 +127,7 @@
 						chi = 'Mùi';
 						break;
 					}
-					document.getElementById('userOutput').innerHTML = `${can} ${chi}`;
+					namam.value = can + ' ' + chi;
 				}
 			</script>
 			<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
