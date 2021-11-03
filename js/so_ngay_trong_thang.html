@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Số ngày trong tháng</title>
+	<style type="text/css">
+		body{
+			font-family: 'Times New Roman', Times, serif;
+			background-image: url('D:/web/js/assets/bai3_background.jpg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			font-size: 15px;
+			line-height: 1.5;
+			padding: 0;
+			margin: 0;
+		}
+		* {
+			box-sizing: border-box;
+		}
+		.container{
+			width: 425px;
+			height: auto;
+			margin: 100px auto;
+			background-color: #0066ff;
+			border-radius: 5px;
+		}
+		.base{
+			width: 100%;
+			margin: 0;
+			overflow: hidden;
+			display: block;
+			float: none;
+		}
+		.block{
+			width: 135px;
+			text-align: center;
+			margin: 2px 20px;
+			float: left;
+			padding-left: 50px;
+		}
+		.base h4{
+			text-align: center;
+			font-family: serif;
+			font-weight: normal;
+			margin-top: 0px;
+			box-shadow: 0px 2px #0d0d0d;
+			background: #000066;
+			font-size: 30px;
+		}
+
+		.title{
+			font-size: 20px;
+			text-align: center;
+			font-family: sans-serif;
+			font-weight: normal;
+			line-height: 0.5;
+			letter-spacing: 0.5px;
+			word-spacing: 2.7px;
+			color: #ffffff;
+		}
+		input[type=text] {
+			width: 100px;
+			margin: auto;
+			outline: none;
+			min-height: 20px;
+			border: 2px solid #1073d0;
+			padding: 12px;
+			background-color: #f7f7f7;
+			border-radius: 2px;
+			color: #1073d0;
+			font-size: 17px;
+		}
+		input[type=text]:focus{
+			background-color: #ffffff;
+			border: 2px solid orange;
+			outline: none;
+		}
+		input[type=button]{
+			width: 140px;
+			margin-left: 35%;
+			margin-top: 40px;
+			outline: none;
+			border: none;
+			border-radius: 2px;
+			background-color: #999966;
+			color: #ffffff;
+			padding: 14px 16px;
+			text-align: center;
+			font-size: 16px;
+		}
+		input[type=button]:hover{
+			background-color: #003669;
+		}
+
+		#ngay{
+			text-align: center;
+			display: block;
+			margin: 10px;
+			margin-top: 35px;
+			padding: 10px;
+			padding-bottom: 20px;
+			overflow: hidden;
+			font-family: verdana;
+			font-size: 23px;
+			font-weight: normal;
+			line-height: 1.5;
+			word-spacing: 2.7px;
+			color: navy;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<form name="tinh_ngay" method="post">
+			<div class="base">
+				<div class="enter">
+					<h4 style="color: white">TÍNH NGÀY TRONG THANG</h4>
+				</div>
+				<div class="block">
+					<p class="title">Tháng</p>
+					<input type="text" name="thang" id="thang" placeholder="mm" required="required" minlength="1" maxlength="2" />
+				</div>
+				<div class="block">
+					<p class="title">Năm</p>
+					<input type="text" name="nam" id="nam" placeholder="yyyy" required="required" minlength="4" maxlength="4" />
+				</div>
+			</div>
+			<div class="base">
+				<div class="enter">
+					<input type="button" name="submit" value="Tính số ngày" onclick="songay()" />
+				</div>
+			</div>
+			<div id="ngay"></div>
+		</form>
+	</div>
+	<script>
+		function songay() {
+			let thang = parseInt(document.getElementById('thang').value);
+			let nam = parseInt(document.getElementById('nam').value);
+			let date = 0;
+
+			switch(thang){
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+				case 8:
+				case 10:
+				case 12:
+					date = 31;
+					break;
+				case 4:
+				case 6:
+				case 9:
+				case 11:
+					date = 30;
+					break;
+				case 2:
+					if (nam% 400 == 0 || (nam % 4 == 0 && nam % 100 != 0)) {
+						date = 29;
+					} else {
+						date = 28;
+					}
+			}
+			document.getElementById('ngay').innerHTML= `Tháng ${thang} năm ${nam} có ${date} ngày!`;
+		}
+	</script>
+</body>
+</html>
