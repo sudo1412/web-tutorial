@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<form>
+		<div>
+			<input type="number" id="input_number" placeholder="Nhập số bạn muốn kiểm tra..." style="width: 300px">
+			<button type="button" onclick="check()"> Kiểm tra</button>
+		</div>
+		<p id = "chan_le"></p>
+		<p id = "nguyen_to"></p>
+		<p id = "chuoi"></p>
+		<p id = "so_lan_nhap"></p>
+
+	</form>
+
+	<script type="text/javascript">
+		var solan = 0;
+		function check() {
+			let so = Number(document.getElementById('input_number').value);
+			let solan;
+			let chuoi = [];
+
+			//check chẵn lẽ
+			if((so - Math.floor(so)) != 0) {
+				document.getElementById('chan_le').innerHTML = 'Đây là số thập phân!';
+			} 
+			else {
+				if(so % 2 == 0) {
+					document.getElementById('chan_le').innerHTML = 'Đây là số chẵn!';
+				} else {
+					document.getElementById('chan_le').innerHTML = 'Đây là số lẻ!';
+				}
+			}
+
+			//check số nguyên tố
+			if(so < 2) {
+				document.getElementById('nguyen_to').innerHTML = 'Đây là không phải là số nguyên tố!';
+			} else if(so == 2){
+				document.getElementById('nguyen_to').innerHTML = 'Đây là số nguyên tố!';
+			} else {
+				for (var i = 2; i < so; i++) {
+					if(so % i == 0){
+						document.getElementById('nguyen_to').innerHTML = 'Đây không phải là số nguyên tố!';
+					} 
+					else {
+						document.getElementById('nguyen_to').innerHTML = 'Đây là số nguyên tố!';
+					}
+				}
+			}
+
+			//in chuỗi từ 1 -> n
+			if(so > 0){
+				for (var i = 1; i <= so; i++) {
+					chuoi.push(i);
+				}
+				document.getElementById('chuoi').innerHTML = chuoi;
+			} else {
+				for (var i = so; i <= 1; i++) {
+					chuoi.push(i);
+				}
+				document.getElementById('chuoi').innerHTML = chuoi;
+			}
+			solan++;
+			document.getElementById('so_lan_nhap').innerHTML = solan;
+		}
+	</script>
+</body>
+</html>
