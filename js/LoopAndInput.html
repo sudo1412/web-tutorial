@@ -8,8 +8,8 @@
 <body>
 	<form>
 		<div>
-			<input type="number" id="input_number" placeholder="Nhập số bạn muốn kiểm tra..." style="width: 300px">
-			<button type="button" onclick="check()"> Kiểm tra</button>
+			<input id="input_number" placeholder="Nhập số bạn muốn kiểm tra..." style="width: 300px">
+			<button id="btn" type="button" onclick="check()"> Kiểm tra</button>
 		</div>
 		<p id = "chan_le"></p>
 		<p id = "nguyen_to"></p>
@@ -17,12 +17,22 @@
 		<p id = "so_lan_nhap"></p>
 
 	</form>
-
+	<!-- Capture Enter key event -->
+	<script>
+		var input = document.getElementById("input_number");
+		input.addEventListener("keyup", function(enter) {
+			if (enter.keyCode === 13) {
+				enter.preventDefault();
+				document.getElementById("btn").click();
+			}
+		});
+	</script>
 	<script type="text/javascript">
 		var solan = 0;
 		function check() {
+			solan += 1;
+			document.getElementById('so_lan_nhap').innerHTML = solan;
 			let so = Number(document.getElementById('input_number').value);
-			let solan;
 			let chuoi = [];
 
 			//check chẵn lẽ
@@ -65,8 +75,6 @@
 				}
 				document.getElementById('chuoi').innerHTML = chuoi;
 			}
-			solan++;
-			document.getElementById('so_lan_nhap').innerHTML = solan;
 		}
 	</script>
 </body>
