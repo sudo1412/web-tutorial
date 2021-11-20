@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Validate Form</title>
+	<meta charset="utf_8">
+	<style type="text/css">
+		*, *:before, *:after {
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Nunito', sans-serif;
+			color: #384047;
+		}
+
+		form {
+			max-width: 300px;
+			margin: 10px auto;
+			padding: 10px 20px;
+			background: #f4f7f8;
+			border-radius: 8px;
+		}
+
+		input[type="text"],
+		input[type="password"],
+		input[type="email"],
+		textarea {
+			background: rgba(255,255,255,0.1);
+			border: none;
+			font-size: 16px;
+			height: auto;
+			margin: 0;
+			outline: 0;
+			padding: 10px;
+			width: 100%;
+			background-color: #e8eeef;
+			color: #8a97a0;
+			box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+/*			margin-bottom: 10px;*/
+		}
+
+		input[type="radio"] {
+			margin: 0 4px 8px 0;
+			margin-bottom: 10px;
+		}
+
+		select {
+			padding: 6px;
+			height: 32px;
+			border-radius: 2px;
+		}
+
+		button {
+			padding: 9px 29px 8px 29px;
+			color: #FFF;
+			background-color: #4bc970;
+			font-size: 18px;
+			text-align: center;
+			font-style: normal;
+			border-radius: 5px;
+			width: 100%;
+			border: 1px solid #3ac162;
+			box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+			margin-bottom: 10px;
+		}
+
+		span {
+			color: red;
+			font-size: 12px;
+			padding-right: 2px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 8px;
+		}
+
+		label.light {
+			font-weight: 300;
+			display: inline;
+		}
+
+		@media screen and (min-width: 480px) {
+
+			form {
+				max-width: 480px;
+			}
+
+		}
+
+	</style>
+</head>
+<body>
+	<form>
+		<label for="ten">Tên</label>
+		<input type="text" name="ten" id="ten">
+		<span id="valid_ten"></span>
+		<br>
+		<label>Giới tính</label>
+		<input type="radio" name="gioi_tinh">Nam
+		<input type="radio" name="gioi_tinh">Nữ
+		<input type="radio" name="gioi_tinh">Khác
+		<br>
+		<span id="valid_gioi_tinh"></span>
+		<br>
+		<label for="dia_chi">Địa chỉ</label>
+		<input type="text" name="dia_chi" id="dia_chi">
+		<span id="valid_dia_chi"></span>
+		<br>
+		<label for="email">Email</label>
+		<input type="email" name="email" id="email">
+		<span id="valid_email"></span>
+		<br>
+		<label for="mat_khau">Mật khẩu</label>
+		<input type="password" name="mat_khau" id="mat_khau">
+		<span id="valid_mat_khau"></span>
+		<br>
+		<label for="so_thich">Sở thích</label>
+		<textarea id="so_thich"></textarea>
+		<span id="valid_so_thich"></span>
+		<br>
+		<button onclick="return kiemtra()">Đăng ký</button>
+	</form>
+	<script type="text/javascript">
+		function kiemtra() {
+			let kiem_tra_loi = false;
+
+			//tên
+			let name = document.getElementById('ten').value;
+			if (name == "") {
+				document.getElementById('valid_ten').innerHTML ='*Vui lòng nhập tên của bạn!';
+				kiem_tra_loi = true;
+			} else {
+				let regex_ten = /^([A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]{1,6}\s?)+$/;
+				if (!regex_ten.test(name)) {
+					document.getElementById('valid_ten').innerHTML ='*Tên không được chưa ký tự đặc biệt và số!!';
+					kiem_tra_loi = true;
+				} else {
+					document.getElementById('valid_ten').innerHTML ='';
+				}
+			}
+
+			//giới tính
+			let mang_gioi_tinh = document.getElementsByName('gioi_tinh');
+			let kiem_tra_gioi_tinh = false;
+			for (var i = 0; i < mang_gioi_tinh.length; i++) {
+				if (mang_gioi_tinh[i].checked) {
+					kiem_tra_gioi_tinh = true;
+				}
+			}
+			if (kiem_tra_gioi_tinh == false) {
+				document.getElementById('valid_gioi_tinh').innerHTML = '*Hãy chọn giới tính của bạn!!';
+				kiem_tra_loi = true;
+			} else {
+				document.getElementById('valid_gioi_tinh').innerHTML ='';
+			}
+
+			//địa chỉ
+			let diachi = document.getElementById('dia_chi').value;
+			if (diachi == "") {
+				document.getElementById('valid_dia_chi').innerHTML = '*Hãy nhập địa chỉ của bạn!';
+				kiem_tra_loi = true;
+			}
+
+			//email
+			let value_email = document.getElementById('email').value;
+			if (value_email == "") {
+				document.getElementById('valid_email').innerHTML = '*Nhập email đi bro!!';
+				kiem_tra_loi = true;
+			} else {
+				let regex_email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (!value_email.match(regex_email)) {
+					document.getElementById('valid_email').innerHTML = '*Nhập email sai rồi!';
+					kiem_tra_loi = true;
+				} else {
+					document.getElementById('valid_email').innerHTML = '';
+				}
+			}
+
+			//mật khẩu
+			let password = document.getElementById('mat_khau').value;
+			if (password == "") {
+				document.getElementById('valid_mat_khau').innerHTML = '*Nhập mật khẩu cho an toàn nào!';
+				kiem_tra_loi = true;
+			} else {
+				let regex_password = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+				if (!password.match(regex_password)) {
+					document.getElementById('valid_mat_khau').innerHTML = '*Mật khẩu từ 8-15 ký tự bao gồm in hoa, thường, số và ký tự đặc biệt!';
+					kiem_tra_loi = true;
+				} else {
+					document.getElementById('valid_mat_khau').innerHTML = '';
+				}
+			}
+
+			// //sở thích
+			// let so_thich_value = document.getElementById('so_thich').value;
+			// if (so_thich_value == "") {
+			// 	document.getElementById('valid_so_thich').innerHTML = '*Hãy nhập sở thích!';
+			// 	kiem_tra_loi = true;
+			// } else {
+			// 	document.getElementById('valid_so_thich').innerHTML = '';
+			// }
+
+			if (kiem_tra_loi) {
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
